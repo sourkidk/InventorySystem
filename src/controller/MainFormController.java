@@ -47,6 +47,8 @@ public class MainFormController implements Initializable {
     @FXML
     void onActionExit(ActionEvent event) {
 
+        System.exit(0);
+
     }
 
 

@@ -157,7 +157,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" text="Cancel">
+                        <Button mnemonicParsing="false" onAction="#onActionDisplayMainForm" prefHeight="30.0" text="Cancel">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -15,7 +15,7 @@ public class ModifyProductFormController implements Initializable {
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
 
-        switchToScene(event,"/view/MainForm.fxml");
+        switchToScene(event,  "/view/MainForm.fxml");
 
     }
 
