@@ -3,6 +3,9 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,6 +14,43 @@ import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
 public class MainFormController implements Initializable {
+
+    /**
+     * This the tableview for products
+     */
+
+    @FXML
+    private TableView<Product> productTableView;
+
+    /**
+     * This is the fx:id for the ID column of the product table.
+     */
+
+
+    @FXML
+    private TableColumn<Product, Integer> productIDColumn;
+
+    /**
+     * This is the fx:id for the name column of the product table.
+     */
+
+    @FXML
+    private TableColumn<Product, String> productNameCol;
+
+    /**
+     * This is the fx:id for the inventory level column of the product table.
+     */
+
+    @FXML
+    private TableColumn<Product, Integer> productInvCol;
+
+    /**
+     * This is the fx:id for the price column of the product table.
+     */
+
+    @FXML
+    private TableColumn<Product, Double> productPriceCol;
+
 
 
     @FXML

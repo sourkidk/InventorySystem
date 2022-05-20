@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Product;
 
 public class Main extends Application {
 
@@ -18,6 +19,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
+        Product product1 = new Product(1, "Schwinn Road Bike", 300.0, 2, 1, 4);
 
 
         launch(args);

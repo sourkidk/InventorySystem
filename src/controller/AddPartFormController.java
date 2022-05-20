@@ -13,9 +13,15 @@ import static controller.SceneController.switchToScene;
 
 public class AddPartFormController implements Initializable {
 
+    /**
+     * Toggle group for In-House/Outsourced radio buttons
+     *
+     */
+
     @FXML
     private ToggleGroup AddPartToggleGroup;
 
+    /***/
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
 
