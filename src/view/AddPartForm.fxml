@@ -25,7 +25,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <RadioButton mnemonicParsing="false" text="In-House">
+                  <RadioButton fx:id="inhouseRadioBtn" mnemonicParsing="false" onAction="#onActionSetTypeInhouse" text="In-House">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -33,7 +33,7 @@
                         <ToggleGroup fx:id="AddPartToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Outsourced" toggleGroup="$AddPartToggleGroup">
+                  <RadioButton fx:id="outsourcedRadioBtn" mnemonicParsing="false" onAction="#onActionSetTypeOutsourced" text="Outsourced" toggleGroup="$AddPartToggleGroup">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -64,7 +64,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brakes" GridPane.rowIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -84,7 +84,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Machine ID" GridPane.rowIndex="5">
+                  <Text fx:id="partTypeAuxField" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -94,37 +94,37 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField prefHeight="30.0" GridPane.columnIndex="1">
+                  <TextField fx:id="partIDText" prefHeight="30.0" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="93.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="partNameText" layoutX="93.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <TextField fx:id="partMinText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="partAuxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <TextField fx:id="partMaxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="partInvText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="93.0" layoutY="53.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="partPriceText" layoutX="93.0" layoutY="53.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -136,7 +136,7 @@
             </GridPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" text="Save">
+                  <Button mnemonicParsing="false" onAction="#onActionSavePart" prefHeight="30.0" text="Save">
                      <font>
                         <Font size="14.0" />
                      </font>
