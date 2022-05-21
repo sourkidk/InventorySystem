@@ -111,12 +111,12 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="productTableView" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn prefWidth="70.0" text="Product ID" />
-                            <TableColumn prefWidth="90.0" text="Product Name" />
-                              <TableColumn prefWidth="100.0" text="Inventory Level" />
-                              <TableColumn prefWidth="131.0" text="Price/ Cost per Unit" />
+                            <TableColumn fx:id="productIDColumn" prefWidth="70.0" text="Product ID" />
+                            <TableColumn fx:id="productNameCol" prefWidth="90.0" text="Product Name" />
+                              <TableColumn fx:id="productInvCol" prefWidth="100.0" text="Inventory Level" />
+                              <TableColumn fx:id="productPriceCol" prefWidth="131.0" text="Price/ Cost per Unit" />
                           </columns>
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" />
