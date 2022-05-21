@@ -21,13 +21,39 @@ public class Inventory {
         allProducts.add(product);
     }
     /**
-     * This method returns the ObservableList object.
+     * This method returns the ObservableList object allProducts.
      */
 
 
     public static ObservableList<Product> getAllProducts() {
 
         return allProducts;
+    }
+
+    /**
+     * Initializes the Observable list of Parts.
+     *
+     */
+
+    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+
+    /**
+     * This method adds a Part object to the allParts Observablelist
+     * @param part This is a Part object.
+     */
+
+    public static void addPart(Part part) {
+
+        allParts.add(part);
+    }
+    /**
+     * This method returns the ObservableList object allParts.
+     */
+
+
+    public static ObservableList<Part> getAllParts() {
+
+        return allParts;
     }
 
 }

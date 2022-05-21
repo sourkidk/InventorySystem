@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Inventory;
+import model.Part;
 import model.Product;
 
 import java.io.IOException;
@@ -16,6 +17,21 @@ import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
 public class MainFormController implements Initializable {
+
+    @FXML
+    private TableColumn<Part, Integer> partIdColumn;
+
+    @FXML
+    private TableColumn<Part, Integer> partInvColumn;
+
+    @FXML
+    private TableColumn<Part, String> partNameColumn;
+
+    @FXML
+    private TableColumn<Part, Double> partPriceColumn;
+
+    @FXML
+    private TableView<Part> partTableView;
 
     /**
      * This the tableview for products
@@ -103,6 +119,15 @@ public class MainFormController implements Initializable {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
+        partTableView.setItems(Inventory.getAllParts());
+        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
 
 
     }
