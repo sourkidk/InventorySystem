@@ -2,10 +2,15 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
 import model.Product;
@@ -17,6 +22,9 @@ import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
 public class MainFormController implements Initializable {
+
+    private static Stage stage;
+    private static Part selectedPart;
 
     @FXML
     private TableColumn<Part, Integer> partIdColumn;
@@ -69,6 +77,9 @@ public class MainFormController implements Initializable {
     @FXML
     private TableColumn<Product, Double> productPriceCol;
 
+    public static Part getSelectedPart() {
+        return selectedPart;
+    }
 
 
     @FXML
@@ -88,12 +99,29 @@ public class MainFormController implements Initializable {
     @FXML
     void onActionDisplayModifyPartForm(ActionEvent event) throws IOException {
 
-        switchToScene(event,"/view/ModifyPartForm.fxml");
+        Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/ModifyPartForm.fxml"));
+        loader.load();
+
+        ModifyPartFormController MPFController = loader.getController();
+        MPFController.sendPart(selectedPart);
+
+        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        Parent scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.show();
+
+
+//        switchToScene(event,"/view/ModifyPartForm.fxml");
 
     }
 
     @FXML
     void onActionDisplayModifyProductForm(ActionEvent event) throws IOException {
+
+
 
         switchToScene(event,"/view/ModifyProductForm.fxml");
 

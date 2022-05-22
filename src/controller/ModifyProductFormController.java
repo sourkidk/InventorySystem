@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,5 +25,8 @@ public class ModifyProductFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
     }
+
+
 }

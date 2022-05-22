@@ -33,7 +33,6 @@ public class Main extends Application {
         Inventory.addProduct(product2);
         Inventory.addProduct(product3);
         Inventory.addProduct(product4);
-//        System.out.println(Inventory.getAllProducts());
 
         InHouse inhouse1 = new InHouse(5001, "700cc Wheel", 80.0, 6, 4, 12, 3);
         InHouse inhouse2 = new InHouse(5002, "650cc Wheel", 80.0, 3, 2, 8, 3);
@@ -42,8 +41,6 @@ public class Main extends Application {
         Inventory.addPart(inhouse1);
         Inventory.addPart(inhouse2);
         Inventory.addPart(inhouse3);
-//        System.out.println(Inventory.getAllParts());
-
 
 
         launch(args);
