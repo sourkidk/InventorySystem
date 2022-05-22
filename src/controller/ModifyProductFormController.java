@@ -90,7 +90,28 @@ public class ModifyProductFormController implements Initializable {
     }
 
     @FXML
-    void onActionSave(ActionEvent event) {
+    void onActionSave(ActionEvent event) throws IOException {
+        try {
+            int id = Integer.parseInt(productIDText.getText());
+            String name = productNameText.getText();
+            double price = Double.parseDouble(productPriceText.getText());
+            int stock = Integer.parseInt(productInvText.getText());
+            int max = Integer.parseInt(productMaxText.getText());
+            int min = Integer.parseInt(productMinText.getText());
+
+            Product newProduct = new Product(id,name,price,stock,min,max);
+
+            newProduct.addAssociatedParts(associatedParts);
+            Inventory.updateProduct(id, newProduct);
+//            Inventory.addProduct(new Product(id, name, price, stock, min, max));
+
+            switchToScene(event, "/view/MainForm.fxml");
+        }
+        catch (NumberFormatException e) {
+
+        }
+
+
 
     }
 

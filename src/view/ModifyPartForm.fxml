@@ -136,7 +136,7 @@
             </GridPane>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" text="Save">
+                  <Button mnemonicParsing="false" onAction="#onActionSaveChanges" prefHeight="30.0" text="Save">
                      <font>
                         <Font size="14.0" />
                      </font>

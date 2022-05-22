@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import model.InHouse;
-import model.Inventory;
-import model.Outsourced;
-import model.Part;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -83,6 +80,40 @@ public class ModifyPartFormController implements Initializable {
             partTypeAuxField.setText("Company");
             partAuxText.setText(outsourcedPart.getCompanyName());
         }
+    }
+
+    @FXML
+    void onActionSaveChanges(ActionEvent event) throws IOException {
+
+        try {
+            int id = Integer.parseInt(partIDText.getText());
+            String name = partNameText.getText();
+            double price = Double.parseDouble(partPriceText.getText());
+            int stock = Integer.parseInt(partInvText.getText());
+            int max = Integer.parseInt(partMaxText.getText());
+            int min = Integer.parseInt(partMinText.getText());
+
+
+
+            if( inhouseRadioBtn.isSelected() ) {
+                int machineID = Integer.parseInt(partAuxText.getText());
+                Part newPart = new InHouse(id, name, price, stock, max, min, machineID);
+                Inventory.updatePart(id, newPart);
+                switchToScene(event, "/view/MainForm.fxml");
+            }
+            else if ( outsourcedRadioBtn.isSelected() ) {
+                String company = partAuxText.getText();
+                Part newPart = new Outsourced(id, name, price, stock, max, min, company);
+                Inventory.updatePart(id, newPart);
+                switchToScene(event, "/view/MainForm.fxml");
+            }
+
+
+
+        } catch(NumberFormatException e) {
+
+        }
+
     }
 
 

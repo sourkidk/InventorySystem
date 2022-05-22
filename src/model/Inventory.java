@@ -75,4 +75,34 @@ public class Inventory {
             return false;
         }
     }
+
+    public static void updateProduct(int id, Product newProduct){
+        int index = -1;
+
+        for(Product product: Inventory.getAllProducts()) {
+            index++;
+
+            if (product.getId() == id) {
+                Inventory.getAllProducts().set(index, newProduct);
+            }
+        }
+
+
+    }
+
+    public static void updatePart(int id, Part newPart ) {
+        int index = -1;
+
+        for(Part part: Inventory.getAllParts()) {
+            index++;
+
+            if (part.getId() == id) {
+                Inventory.getAllParts().set(index, newPart);
+            }
+        }
+
+
+    }
+
+
 }
