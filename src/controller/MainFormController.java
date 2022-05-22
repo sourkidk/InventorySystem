@@ -25,7 +25,9 @@ import static controller.SceneController.switchToScene;
 public class MainFormController implements Initializable {
 
     private static Stage stage;
-    private static Part selectedPart;
+
+    @FXML
+    private TableView<Part> partTableView;
 
     @FXML
     private TableColumn<Part, Integer> partIdColumn;
@@ -39,8 +41,6 @@ public class MainFormController implements Initializable {
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
 
-    @FXML
-    private TableView<Part> partTableView;
 
     /**
      * This the tableview for products
@@ -78,9 +78,6 @@ public class MainFormController implements Initializable {
     @FXML
     private TableColumn<Product, Double> productPriceCol;
 
-    public static Part getSelectedPart() {
-        return selectedPart;
-    }
 
 
     @FXML
@@ -121,23 +118,42 @@ public class MainFormController implements Initializable {
             alert.setContentText("No Part Selected.");
             alert.show();
         }
-
-
-//        switchToScene(event,"/view/ModifyPartForm.fxml");
-
     }
 
     @FXML
     void onActionDisplayModifyProductForm(ActionEvent event) throws IOException {
 
+        try {
+            Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
 
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ModifyProductForm.fxml"));
+            loader.load();
 
-        switchToScene(event,"/view/ModifyProductForm.fxml");
+            ModifyProductFormController ModProdController = loader.getController();
+            ModProdController.sendProduct(selectedProduct);
 
-
-
-
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No Product Selected.");
+            alert.show();
+        }
     }
+
+
+
+//        switchToScene(event,"/view/ModifyProductForm.fxml");
+
+
+
+
+
 
     @FXML
     void onActionExit(ActionEvent event) {
