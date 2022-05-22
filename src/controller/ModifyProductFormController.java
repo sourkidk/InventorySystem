@@ -3,9 +3,9 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Inventory;
 import model.Part;
 import model.Product;
 
@@ -17,6 +17,36 @@ import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
 public class ModifyProductFormController implements Initializable {
+
+    @FXML
+    private TableColumn<Part, Integer > allPartsIDColumn;
+
+    @FXML
+    private TableColumn<Part,Integer > allPartsInvColumn;
+
+    @FXML
+    private TableColumn<Part, Double> allPartsNameColumn;
+
+    @FXML
+    private TableColumn<Part, Double> allPartsPriceColumn;
+
+    @FXML
+    private TableView<Part> allPartsTableView;
+
+    @FXML
+    private TableColumn<Part,Integer > associatedPartsIDColunn;
+
+    @FXML
+    private TableColumn<Part, Integer> associatedPartsInvColumn;
+
+    @FXML
+    private TableColumn<Part, String> associatedPartsNameColumn;
+
+    @FXML
+    private TableColumn<Part, Double> associatedPartsPriceColumn;
+
+    @FXML
+    private TableView<Part> associatedPartsTableView;
 
     @FXML private TextField productIDText;
 
@@ -56,6 +86,12 @@ public class ModifyProductFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        allPartsTableView.setItems(Inventory.getAllParts());
+        allPartsIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        allPartsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        allPartsInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        allPartsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 
     }
