@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Inventory;
 import model.Part;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +18,25 @@ import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
 public class AddProductFormController implements Initializable {
+
+
+    @FXML
+    private TextField productIDText;
+
+    @FXML
+    private TextField productInvText;
+
+    @FXML
+    private TextField productMaxText;
+
+    @FXML
+    private TextField productMinText;
+
+    @FXML
+    private TextField productNameText;
+
+    @FXML
+    private TextField productPriceText;
 
     @FXML
     private TableView<Part> allPartTableView;
@@ -50,6 +71,25 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     void onActionRemovePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionSaveProduct(ActionEvent event) throws IOException {
+        try {
+            int id = Integer.parseInt(productIDText.getText());
+            String name = productNameText.getText();
+            double price = Double.parseDouble(productPriceText.getText());
+            int stock = Integer.parseInt(productInvText.getText());
+            int max = Integer.parseInt(productMaxText.getText());
+            int min = Integer.parseInt(productMinText.getText());
+
+            Inventory.addProduct(new Product(id, name, price, stock, min, max));
+            switchToScene(event, "/view/MainForm.fxml");
+        }
+        catch (NumberFormatException e) {
+
+        }
 
     }
 

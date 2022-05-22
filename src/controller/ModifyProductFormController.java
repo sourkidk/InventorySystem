@@ -72,6 +72,16 @@ public class ModifyProductFormController implements Initializable {
 
     }
 
+    @FXML
+    void onActionRemovePart(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionSave(ActionEvent event) {
+
+    }
+
     public void sendProduct(Product selectedProduct) {
         this.selectedProduct = selectedProduct;
 
