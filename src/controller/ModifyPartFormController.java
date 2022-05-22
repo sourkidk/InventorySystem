@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import model.InHouse;
 import model.Inventory;
+import model.Outsourced;
 import model.Part;
 
 import java.io.IOException;
@@ -43,10 +44,10 @@ public class ModifyPartFormController implements Initializable {
     private TextField partMaxText;
 
     @FXML
-    private TextField partMixText;
+    private TextField partMinText;
 
     @FXML
-    private Text partNameText;
+    private TextField partNameText;
 
     @FXML
     private TextField partPriceText;
@@ -74,10 +75,32 @@ public class ModifyPartFormController implements Initializable {
 
     public void sendPart(Part selectedPart) {
         this.selectedPart = selectedPart;
-        partID = Inventory.getAllParts().indexOf(selectedPart);
-//        System.out.println(partID);
 
-        partIDText.setText((Integer.toString(selectedPart.getId())));
+        partID = Inventory.getAllParts().indexOf(selectedPart);
+
+        partIDText.setText((String.valueOf(selectedPart.getId())));
+        partNameText.setText(selectedPart.getName());
+        partInvText.setText(String.valueOf(selectedPart.getStock()));
+        partMaxText.setText(String.valueOf(selectedPart.getMax()));
+        partMinText.setText(String.valueOf(selectedPart.getMin()));
+        partPriceText.setText(String.valueOf(selectedPart.getPrice()));
+
+        if ( selectedPart instanceof InHouse) {
+            InHouse inHousePart = (InHouse) selectedPart;
+            inhouseRadioBtn.setSelected(true);
+            partTypeAuxField.setText("Machine ID");
+            partAuxText.setText(String.valueOf(inHousePart.getMachineId()));
+        }
+        else {
+            Outsourced outsourcedPart = (Outsourced) selectedPart;
+            outsourcedRadioBtn.setSelected(true);
+            partTypeAuxField.setText("Company");
+            partAuxText.setText(outsourcedPart.getCompanyName());
+        }
+
+
+
+
 
     }
 

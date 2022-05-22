@@ -64,7 +64,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="partNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.rowIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -94,12 +94,12 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="93.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="partNameText" layoutX="93.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="partMixText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <TextField fx:id="partMinText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>

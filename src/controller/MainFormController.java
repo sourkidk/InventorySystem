@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -99,19 +100,27 @@ public class MainFormController implements Initializable {
     @FXML
     void onActionDisplayModifyPartForm(ActionEvent event) throws IOException {
 
-        Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
+        try {
+            Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/ModifyPartForm.fxml"));
-        loader.load();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/ModifyPartForm.fxml"));
+            loader.load();
 
-        ModifyPartFormController MPFController = loader.getController();
-        MPFController.sendPart(selectedPart);
+            ModifyPartFormController MPFController = loader.getController();
+            MPFController.sendPart(selectedPart);
 
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.show();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("No Part Selected.");
+            alert.show();
+        }
 
 
 //        switchToScene(event,"/view/ModifyPartForm.fxml");
