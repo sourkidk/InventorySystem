@@ -74,7 +74,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="306.0" layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Delete">
+                              <Button layoutX="306.0" layoutY="29.0" mnemonicParsing="false" onAction="#onActionDeletePart" prefHeight="30.0" prefWidth="60.0" text="Delete">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -137,7 +137,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Delete">
+                              <Button mnemonicParsing="false" onAction="#onActionDeleteProduct" prefHeight="30.0" prefWidth="60.0" text="Delete">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

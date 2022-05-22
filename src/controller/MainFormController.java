@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
@@ -18,6 +15,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static controller.SceneController.switchToScene;
@@ -146,11 +144,44 @@ public class MainFormController implements Initializable {
         }
     }
 
+    @FXML
+    void onActionDeletePart(ActionEvent event) {
+
+        Part selectedPart = partTableView.getSelectionModel().getSelectedItem();
+
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to remove this part?");
+        Optional<ButtonType> result = confirmDelete.showAndWait();
+
+        if ( result.isPresent() && result.get() == ButtonType.OK )
+
+            Inventory.deletePart(selectedPart);
+    }
 
 
-//        switchToScene(event,"/view/ModifyProductForm.fxml");
 
 
+
+    @FXML
+    void onActionDeleteProduct(ActionEvent event) {
+
+        Product selectedProduct = productTableView.getSelectionModel().getSelectedItem();
+
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to remove this product?");
+        Optional<ButtonType> result = confirmDelete.showAndWait();
+
+        if ( result.isPresent() && result.get() == ButtonType.OK ) {
+
+            if (selectedProduct.getAllAssociatedParts().size() > 0) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR MESSAGE!");
+                alert.setContentText("You must remove all associated parts before you delete the product.");
+                alert.showAndWait();
+                return;
+
+            } else
+                Inventory.deleteProduct(selectedProduct);
+        }
+    }
 
 
 

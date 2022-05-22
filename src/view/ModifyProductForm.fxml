@@ -52,7 +52,7 @@
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="productIDText" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="productIDText" editable="false" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" />
                         <TextField fx:id="productNameText" layoutX="86.0" layoutY="10.0" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
@@ -120,7 +120,7 @@
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="114.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" text="Add">
+                        <Button layoutX="114.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionAddAssociatedPart" prefHeight="30.0" text="Add">
                            <font>
                               <Font size="14.0" />
                            </font>

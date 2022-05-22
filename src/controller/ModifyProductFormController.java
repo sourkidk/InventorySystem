@@ -65,6 +65,14 @@ public class ModifyProductFormController implements Initializable {
     public Product selectedProduct;
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
+    @FXML
+    void onActionAddAssociatedPart(ActionEvent event) {
+        Part selectedPartToAdd = allPartsTableView.getSelectionModel().getSelectedItem();
+        associatedParts.add(selectedPartToAdd);
+        associatedPartsTableView.setItems(associatedParts);
+
+    }
+
 
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
