@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,6 +63,8 @@ public class ModifyProductFormController implements Initializable {
     @FXML private TextField productPriceText;
 
     public Product selectedProduct;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+
 
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
@@ -91,6 +95,9 @@ public class ModifyProductFormController implements Initializable {
         productPriceText.setText(String.valueOf(selectedProduct.getPrice()));
         productMaxText.setText(String.valueOf(selectedProduct.getMax()));
         productMinText.setText(String.valueOf(selectedProduct.getMin()));
+
+        associatedParts.addAll(selectedProduct.getAllAssociatedParts());
+
     }
 
 
@@ -102,6 +109,12 @@ public class ModifyProductFormController implements Initializable {
         allPartsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         allPartsInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         allPartsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        associatedPartsTableView.setItems(associatedParts);
+        associatedPartsIDColunn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        associatedPartsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        associatedPartsInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        associatedPartsPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 
     }

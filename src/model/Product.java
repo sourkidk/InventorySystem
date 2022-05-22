@@ -73,8 +73,8 @@ public class Product {
         return associatedParts;
     }
 
-    public void addAssociatedParts(Part part) {
-        associatedParts.add(part);
+    public void addAssociatedParts(ObservableList<Part> parts) {
+        associatedParts.addAll(parts);
     }
 
     public void deleteAssociatedPart(Part part) {

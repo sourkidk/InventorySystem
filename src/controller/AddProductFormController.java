@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,8 @@ import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
 public class AddProductFormController implements Initializable {
+
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
 
     @FXML
@@ -55,7 +59,7 @@ public class AddProductFormController implements Initializable {
 
 
     @FXML
-    private TableView<?> associatedPartTableView;
+    private TableView<Part> associatedPartTableView;
 
     @FXML
     private TableColumn<Part, Integer> associatedPartIDColumn;
@@ -68,6 +72,17 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     private TableColumn<Part, Double> associatedPartPriceColumn;
+
+    @FXML
+    void onActionAddAssociatedPart(ActionEvent event) {
+
+        Part selectedPartToAdd = allPartTableView.getSelectionModel().getSelectedItem();
+        associatedParts.add(selectedPartToAdd);
+        associatedPartTableView.setItems(associatedParts);
+
+
+    }
+
 
     @FXML
     void onActionRemovePart(ActionEvent event) {
@@ -84,7 +99,12 @@ public class AddProductFormController implements Initializable {
             int max = Integer.parseInt(productMaxText.getText());
             int min = Integer.parseInt(productMinText.getText());
 
-            Inventory.addProduct(new Product(id, name, price, stock, min, max));
+            Product product = new Product(id,name,price,stock,min,max);
+
+            product.addAssociatedParts(associatedParts);
+            Inventory.addProduct(product);
+//            Inventory.addProduct(new Product(id, name, price, stock, min, max));
+
             switchToScene(event, "/view/MainForm.fxml");
         }
         catch (NumberFormatException e) {
@@ -111,6 +131,11 @@ public class AddProductFormController implements Initializable {
         allPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         allPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        associatedPartTableView.setItems(associatedParts);
+        associatedPartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        associatedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        associatedPartInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        associatedPartPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 
     }
