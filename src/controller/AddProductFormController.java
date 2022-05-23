@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Inventory;
 import model.Part;
@@ -15,6 +13,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static controller.SceneController.switchToScene;
@@ -99,13 +98,26 @@ public class AddProductFormController implements Initializable {
             int max = Integer.parseInt(productMaxText.getText());
             int min = Integer.parseInt(productMinText.getText());
 
-            Product product = new Product(id,name,price,stock,min,max);
-
-            product.addAssociatedParts(associatedParts);
-            Inventory.addProduct(product);
-//            Inventory.addProduct(new Product(id, name, price, stock, min, max));
-
-            switchToScene(event, "/view/MainForm.fxml");
+            if ( max < min) {
+                Alert parsAlert = new Alert(Alert.AlertType.ERROR);
+                parsAlert.setTitle("Invalid Inventory Pars");
+                parsAlert.setContentText("Maximum must exceed minimum.");
+                parsAlert.showAndWait();
+                return;
+            }
+            else if ( stock > min && stock <= max ) {
+                Product product = new Product(id, name, price, stock, min, max);
+                product.addAssociatedParts(associatedParts);
+                Inventory.addProduct(product);
+                switchToScene(event, "/view/MainForm.fxml");
+            }
+            else {
+                Alert invAlert = new Alert(Alert.AlertType.ERROR);
+                invAlert.setTitle("Invalid Inventory Amount");
+                invAlert.setContentText("The inventory quantify must be greater than the minimum and not exceed the maximum");
+                invAlert.showAndWait();
+                return;
+            }
         }
         catch (NumberFormatException e) {
 
@@ -115,8 +127,11 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
-
-        switchToScene(event,"/view/MainForm.fxml");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This is clear any changes you've made. " +
+                "Do you want to continue? ");
+        Optional<ButtonType> result = alert.showAndWait();
+        if ( result.isPresent() && result.get() == ButtonType.OK)
+            switchToScene(event,  "/view/MainForm.fxml");
 
     }
 

@@ -99,13 +99,30 @@ public class ModifyProductFormController implements Initializable {
             int max = Integer.parseInt(productMaxText.getText());
             int min = Integer.parseInt(productMinText.getText());
 
-            Product newProduct = new Product(id,name,price,stock,min,max);
+            if ( max < min) {
+                Alert parsAlert = new Alert(Alert.AlertType.ERROR);
+                parsAlert.setTitle("Invalid Inventory Pars");
+                parsAlert.setContentText("Maximum must exceed minimum.");
+                parsAlert.showAndWait();
+                return;
+            }
+            else if ( stock > min && stock <= max ) {
 
-            newProduct.addAssociatedParts(associatedParts);
-            Inventory.updateProduct(id, newProduct);
-//            Inventory.addProduct(new Product(id, name, price, stock, min, max));
+                Product newProduct = new Product(id, name, price, stock, min, max);
 
-            switchToScene(event, "/view/MainForm.fxml");
+                newProduct.addAssociatedParts(associatedParts);
+                Inventory.updateProduct(id, newProduct);
+                switchToScene(event, "/view/MainForm.fxml");
+            }
+            else {
+                Alert invAlert = new Alert(Alert.AlertType.ERROR);
+                invAlert.setTitle("Invalid Inventory Amount");
+                invAlert.setContentText("The inventory quantify must be greater than the minimum and not exceed the maximum");
+                invAlert.showAndWait();
+                return;
+            }
+
+
         }
         catch (NumberFormatException e) {
 

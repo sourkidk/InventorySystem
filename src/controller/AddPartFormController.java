@@ -3,9 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import model.InHouse;
 import model.Inventory;
@@ -13,6 +11,7 @@ import model.Outsourced;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static controller.SceneController.switchToScene;
@@ -66,6 +65,7 @@ public class AddPartFormController implements Initializable {
 
     @FXML
     void onActionSetTypeOutsourced(ActionEvent event) {
+
         partTypeAuxField.setText("Company");
     }
 
@@ -80,15 +80,39 @@ public class AddPartFormController implements Initializable {
             int max = Integer.parseInt(partMaxText.getText());
             int min = Integer.parseInt(partMinText.getText());
 
-            if( inhouseRadioBtn.isSelected() ) {
-                int machineID = Integer.parseInt(partAuxText.getText());
-                Inventory.addPart(new InHouse(id, name, price, stock, max, min, machineID));
-                switchToScene(event, "/view/MainForm.fxml");
+            if ( max < min) {
+                Alert parsAlert = new Alert(Alert.AlertType.ERROR);
+                parsAlert.setTitle("Invalid Inventory Pars");
+                parsAlert.setContentText("Maximum must exceed minimum.");
+                parsAlert.showAndWait();
+                return;
             }
-            else if ( outsourcedRadioBtn.isSelected() ) {
-                String company = partAuxText.getText();
-                Inventory.addPart(new Outsourced(id, name, price, stock, max, min, company ));
-                switchToScene(event, "/view/MainForm.fxml");
+            else if ( stock > min && stock <= max ) {
+                if (inhouseRadioBtn.isSelected()) {
+                    int machineID = Integer.parseInt(partAuxText.getText());
+                    if (machineID != 0) {
+                        Inventory.addPart(new InHouse(id, name, price, stock, min, max, machineID));
+                        switchToScene(event, "/view/MainForm.fxml");
+                    } else
+                        System.out.println("Problem");
+                } else if (outsourcedRadioBtn.isSelected()) {
+                    String company = partAuxText.getText();
+                    Inventory.addPart(new Outsourced(id, name, price, stock, min, max, company));
+                    switchToScene(event, "/view/MainForm.fxml");
+                } else {
+                    Alert sourceAlert = new Alert(Alert.AlertType.ERROR);
+                    sourceAlert.setTitle("No Source Selected");
+                    sourceAlert.setContentText("You must select In-house or Outsourced for each item.");
+                    sourceAlert.showAndWait();
+                    return;
+
+                }
+            } else {
+                Alert invAlert = new Alert(Alert.AlertType.ERROR);
+                invAlert.setTitle("Invalid Inventory Amount");
+                invAlert.setContentText("The inventory quantify must be greater than the minimum and not exceed the maximum");
+                invAlert.showAndWait();
+                return;
             }
 
 
@@ -101,8 +125,11 @@ public class AddPartFormController implements Initializable {
     /***/
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
-
-        switchToScene(event,"/view/MainForm.fxml");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This is clear any changes you've made. " +
+                "Do you want to continue? ");
+        Optional<ButtonType> result = alert.showAndWait();
+        if ( result.isPresent() && result.get() == ButtonType.OK)
+            switchToScene(event,"/view/MainForm.fxml");
 
     }
 
