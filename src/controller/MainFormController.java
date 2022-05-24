@@ -12,29 +12,51 @@ import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
 import model.Product;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import static controller.SceneController.switchToScene;
 
 public class MainFormController implements Initializable {
 
+    /**
+     * This is the stage object that the scene is built on
+     * */
+
     private static Stage stage;
+
+    /**
+     * This is the table containing the full list of Parts.
+     * */
 
     @FXML
     private TableView<Part> partTableView;
 
+    /**
+     * This column contains the ID for each part object in the list.
+     * */
+
     @FXML
     private TableColumn<Part, Integer> partIdColumn;
+
+    /**
+     * This column contains the inventory quantity for each part object in the list.
+     * */
 
     @FXML
     private TableColumn<Part, Integer> partInvColumn;
 
+    /**
+     * This column contains the name for each part object in the list.
+     * */
+
     @FXML
     private TableColumn<Part, String> partNameColumn;
+
+    /**
+     * This column contains the price for each part object in the list.
+     * */
 
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
@@ -48,7 +70,7 @@ public class MainFormController implements Initializable {
     private TableView<Product> productTableView;
 
     /**
-     * This is the fx:id for the ID column of the product table.
+     * This is the ID column of the product table.
      */
 
 
@@ -56,41 +78,53 @@ public class MainFormController implements Initializable {
     private TableColumn<Product, Integer> productIDColumn;
 
     /**
-     * This is the fx:id for the name column of the product table.
+     * This is the name column of the product table.
      */
 
     @FXML
     private TableColumn<Product, String> productNameCol;
 
     /**
-     * This is the fx:id for the inventory level column of the product table.
+     * This is the inventory level column of the product table.
      */
 
     @FXML
     private TableColumn<Product, Integer> productInvCol;
 
     /**
-     * This is the fx:id for the price column of the product table.
+     * This is the price column of the product table.
      */
 
     @FXML
     private TableColumn<Product, Double> productPriceCol;
 
-
+    /**
+     * This event handler switches to the AddParts scene.
+     * */
 
     @FXML
     void onActionDisplayAddPartForm(ActionEvent event) throws IOException {
 
         switchToScene(event, "/view/AddPartForm.fxml");
-
     }
+
+    /**
+     * This event handler switches to the AddProducts scene.
+     * */
 
     @FXML
     void onActionDisplayAddProductForm(ActionEvent event) throws IOException {
 
         switchToScene(event, "/view/AddProductForm.fxml");
-
     }
+
+    /**
+     * RUNTIME ERROR: The try-catch clause prevents the program from crashing due to NullPointerException.  By default
+     * no part is selected in the main form, so it's common to try to switch to that scene without first selecting an object.
+     *
+     * This method uses the sendPart method of the modifyPart class to send data from the selected part to the
+     * modifyParts form and switches the scene.
+     * */
 
     @FXML
     void onActionDisplayModifyPartForm(ActionEvent event) throws IOException {
@@ -118,6 +152,11 @@ public class MainFormController implements Initializable {
         }
     }
 
+    /**
+     * This method uses the sendProduct method of the modifyProduct class to send data from the selected product to the
+     * modifyProducts form and switches the scene.
+     * */
+
     @FXML
     void onActionDisplayModifyProductForm(ActionEvent event) throws IOException {
 
@@ -144,6 +183,10 @@ public class MainFormController implements Initializable {
         }
     }
 
+    /**
+     * This method removes the selected part permanently from the core observableList data structure
+     * */
+
     @FXML
     void onActionDeletePart(ActionEvent event) {
 
@@ -157,9 +200,9 @@ public class MainFormController implements Initializable {
             Inventory.deletePart(selectedPart);
     }
 
-
-
-
+    /**
+     * This method removes the selected product permanently from the core observableList data structure
+     * */
 
     @FXML
     void onActionDeleteProduct(ActionEvent event) {
@@ -183,36 +226,33 @@ public class MainFormController implements Initializable {
         }
     }
 
-
-
+    /**
+     * This method does a system call to exit the program
+     * */
 
     @FXML
     void onActionExit(ActionEvent event) {
-
         System.exit(0);
-
     }
 
+    /**
+     * When the Main form is loaded, the allParts and allProducts lists are loaded into the table views.
+     * */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         productTableView.setItems(Inventory.getAllProducts());
-
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
 
         partTableView.setItems(Inventory.getAllParts());
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInvColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-
-
 
     }
 }

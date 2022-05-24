@@ -10,67 +10,139 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Inventory;
 import model.Part;
 import model.Product;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import static controller.SceneController.switchToScene;
 
 public class AddProductFormController implements Initializable {
 
+    /**
+     * The associatedParts observablelist is used by this class to hold part items temporarily for manipulation.
+     * */
+
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
+    /**
+     * This is the text field for the ID of the new Part.  This field should not be editable to the user.
+     * */
 
     @FXML
     private TextField productIDText;
 
+    /**
+     * This is the text field for the inventory quantity of the new Part.
+     * */
+
     @FXML
     private TextField productInvText;
+
+    /**
+     * This is the text field for the inventory quantity of the new Part.
+     * */
 
     @FXML
     private TextField productMaxText;
 
+    /**
+     * This is the text field for the inventory quantity of the new Part.
+     * */
+
     @FXML
     private TextField productMinText;
+
+    /**
+     * This is the text field for the inventory quantity of the new Part.
+     * */
 
     @FXML
     private TextField productNameText;
 
+    /**
+     * This is the text field for the inventory quantity of the new Part.
+     * */
+
     @FXML
     private TextField productPriceText;
+
+    /**
+     * This is the table containing the full parts list.
+     * */
 
     @FXML
     private TableView<Part> allPartTableView;
 
+    /**
+     * This is the column containing the ID of each item in the full parts list.
+     * */
+
     @FXML
     private TableColumn<Part, Integer> allPartIDColumn;
+
+    /**
+     * This is the column containing the inventory quantity of each item in the full parts list.
+     * */
 
     @FXML
     private TableColumn<Part, Integer> allPartInvColumn;
 
+    /**
+     * This is the column containing the name of each item in the full parts list.
+     * */
+
     @FXML
     private TableColumn<Part, String> allPartNameColumn;
+
+    /**
+     * This is the column containing the price of each item in the full parts list.
+     * */
 
     @FXML
     private TableColumn<Part, Double> allPartPriceColumn;
 
+    /**
+     * This is the table containing the associated parts list for the new item.
+     * */
 
     @FXML
     private TableView<Part> associatedPartTableView;
 
+    /**
+     * This is the column containing the ID of each item in the associated parts list
+     * for the new item.
+     * */
+
     @FXML
     private TableColumn<Part, Integer> associatedPartIDColumn;
+
+    /**
+     * This is the column containing the inventory quantity of each item in the associated parts list
+     * for the new item.
+     * */
 
     @FXML
     private TableColumn<Part, Integer> associatedPartInvColumn;
 
+    /**
+     * This is the column containing the name of each item in the associated parts list
+     * for the new item.
+     * */
+
     @FXML
     private TableColumn<Part, String> associatedPartNameColumn;
 
+    /**
+     * This is the column containing the price of each item in the associated parts list
+     * for the new item.
+     * */
+
     @FXML
     private TableColumn<Part, Double> associatedPartPriceColumn;
+
+    /**
+     * This method adds the selectedPart to the associatedparts list.
+     * */
 
     @FXML
     void onActionAddAssociatedPart(ActionEvent event) {
@@ -78,15 +150,22 @@ public class AddProductFormController implements Initializable {
         Part selectedPartToAdd = allPartTableView.getSelectionModel().getSelectedItem();
         associatedParts.add(selectedPartToAdd);
         associatedPartTableView.setItems(associatedParts);
-
-
     }
+
+    /**
+     *
+     * */
 
 
     @FXML
     void onActionRemovePart(ActionEvent event) {
 
     }
+
+    /**
+     * This method does the validation on the variables for viability and then feeds the data into the object
+     * constructor to add to the core observableList data structure.
+     * */
 
     @FXML
     void onActionSaveProduct(ActionEvent event) throws IOException {
@@ -120,10 +199,12 @@ public class AddProductFormController implements Initializable {
             }
         }
         catch (NumberFormatException e) {
-
         }
-
     }
+
+    /**
+     * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * */
 
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
@@ -132,10 +213,11 @@ public class AddProductFormController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if ( result.isPresent() && result.get() == ButtonType.OK)
             switchToScene(event,  "/view/MainForm.fxml");
-
     }
 
-
+    /**
+     * When the addProducts form is loaded, the allParts and associatedParts lists are loaded into the table views.
+     * */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
