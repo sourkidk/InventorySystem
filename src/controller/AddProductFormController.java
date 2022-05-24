@@ -19,6 +19,12 @@ import static controller.SceneController.switchToScene;
 public class AddProductFormController implements Initializable {
 
     /**
+     * Calls the generateNewID method to get the next ID in the sequence
+     * */
+
+    int nextID = generateNewID();
+
+    /**
      * The associatedParts observablelist is used by this class to hold part items temporarily for manipulation.
      * */
 
@@ -32,35 +38,35 @@ public class AddProductFormController implements Initializable {
     private TextField productIDText;
 
     /**
-     * This is the text field for the inventory quantity of the new Part.
+     * This is the text field for the inventory quantity of the new Product.
      * */
 
     @FXML
     private TextField productInvText;
 
     /**
-     * This is the text field for the inventory quantity of the new Part.
+     * This is the text field for the inventory quantity of the new Product.
      * */
 
     @FXML
     private TextField productMaxText;
 
     /**
-     * This is the text field for the inventory quantity of the new Part.
+     * This is the text field for the inventory quantity of the new Product.
      * */
 
     @FXML
     private TextField productMinText;
 
     /**
-     * This is the text field for the inventory quantity of the new Part.
+     * This is the text field for the inventory quantity of the new Product.
      * */
 
     @FXML
     private TextField productNameText;
 
     /**
-     * This is the text field for the inventory quantity of the new Part.
+     * This is the text field for the inventory quantity of the new Product.
      * */
 
     @FXML
@@ -164,13 +170,13 @@ public class AddProductFormController implements Initializable {
 
     /**
      * This method does the validation on the variables for viability and then feeds the data into the object
-     * constructor to add to the core observableList data structure.
+     * constructor to add to the allProducts observableList data structure.
      * */
 
     @FXML
     void onActionSaveProduct(ActionEvent event) throws IOException {
         try {
-            int id = Integer.parseInt(productIDText.getText());
+            int id = nextID;
             String name = productNameText.getText();
             double price = Double.parseDouble(productPriceText.getText());
             int stock = Integer.parseInt(productInvText.getText());
@@ -216,11 +222,23 @@ public class AddProductFormController implements Initializable {
     }
 
     /**
+     * This method calls the size method of the allProducts list object and adds the quantity to a base number to make unique sequential ID numbers
+     * */
+
+    public static int generateNewID() {
+        int startingID = 1001;
+        int count = Inventory.getAllProducts().size();
+        return startingID + count;
+    }
+
+    /**
      * When the addProducts form is loaded, the allParts and associatedParts lists are loaded into the table views.
      * */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        productIDText.setText(String.valueOf(nextID));
 
         allPartTableView.setItems(Inventory.getAllParts());
         allPartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));

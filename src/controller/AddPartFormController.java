@@ -18,62 +18,116 @@ import static controller.SceneController.switchToScene;
 
 public class AddPartFormController implements Initializable {
 
+    /**
+     * Calls the generateNewID method to get the next ID in the sequence
+     * */
+
+    int nextID = generateNewID();
+
+    /**
+     * This is the fx:id of the label field for the company name or machineID of the new Part.
+     * */
+
     @FXML
     private Text partTypeAuxField;
 
     /**
-     * Toggle group for In-House/Outsourced radio buttons
-     *
+     * Toggle group for In-House/Outsourced radio buttons.  The toggle group functionality is used only to keep one button selected at a time.
      */
-
 
     @FXML
     private ToggleGroup AddPartToggleGroup;
 
+    /**
+     * The inhouse radio button fx:ml tag
+     * */
+
     @FXML
     private RadioButton inhouseRadioBtn;
+
+    /**
+     * The outsourced radio button fx:ml tag
+     * */
 
     @FXML
     private RadioButton outsourcedRadioBtn;
 
+    /**
+     * This is the fx:id of the text field for the company name or machineID of the new Part.
+     * */
+
     @FXML
     private TextField partAuxText;
+
+    /**
+     * This is the fx:id of the text field for the company name or machineID of the new Part.
+     * */
 
     @FXML
     private TextField partIDText;
 
+    /**
+     * This is the fx:id of the text field for the inventory quantity of the new Part.
+     * */
+
     @FXML
     private TextField partInvText;
+
+    /**
+     * This is the fx:id of the text field for the inventory maximum of the new Part.
+     * */
 
     @FXML
     private TextField partMaxText;
 
+    /**
+     * This is the fx:id of the text field for the inventory minimum of the new Part.
+     * */
+
     @FXML
     private TextField partMinText;
+
+    /**
+     * This is the fx:id of the text field for the name of the new Part.
+     * */
 
     @FXML
     private TextField partNameText;
 
+    /**
+     * This is the fx:id of the text field for the price of the new Part.
+     * */
+
     @FXML
     private TextField partPriceText;
+
+    /**
+     * This method changes the label text to 'MachineID' when the inhouse button is selected.
+     * */
 
     @FXML
     void onActionSetTypeInhouse(ActionEvent event) {
         partTypeAuxField.setText("Machine ID");
-
     }
+
+    /**
+     * This method changes the label text to 'Company' when the outsourced button is selected.
+     * */
 
     @FXML
     void onActionSetTypeOutsourced(ActionEvent event) {
-
         partTypeAuxField.setText("Company");
     }
 
+    /**
+     * This method does the validation on the variables for viability and then feeds the data into the object
+     * constructor to add to the allParts observableList data structure.
+     * */
 
     @FXML
     void onActionSavePart(ActionEvent event) throws IOException {
         try {
-            int id = Integer.parseInt(partIDText.getText());
+            int id = nextID;
             String name = partNameText.getText();
             double price = Double.parseDouble(partPriceText.getText());
             int stock = Integer.parseInt(partInvText.getText());
@@ -114,15 +168,15 @@ public class AddPartFormController implements Initializable {
                 invAlert.showAndWait();
                 return;
             }
-
-
-
         } catch(NumberFormatException e) {
 
         }
     }
 
-    /***/
+    /**
+     * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * */
+
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This is clear any changes you've made. " +
@@ -130,13 +184,26 @@ public class AddPartFormController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if ( result.isPresent() && result.get() == ButtonType.OK)
             switchToScene(event,"/view/MainForm.fxml");
-
     }
 
+    /**
+     * This method calls the size method of the allParts list object and adds the quantity to a base number to make unique sequential ID numbers
+     * */
 
+    public static int generateNewID() {
+        int startingID = 5001;
+        int count = Inventory.getAllParts().size();
+        return startingID + count;
+    }
+
+    /**
+     * The initialize method feeds the nextID variable into the partIDText field so that the ID is set before the rest of the fields are added by the user.
+     * */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        partIDText.setText(String.valueOf(nextID));
 
     }
 }

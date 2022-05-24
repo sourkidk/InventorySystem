@@ -1,13 +1,10 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -15,11 +12,12 @@ public class SceneController {
 
     private static Stage stage;
     private static Scene scene;
-    private static Parent root;
 
 
-    /*  This class and method were made to reduce code reuse in switching Scenes.  The original routine
-    taught in the webinar is viewable in the MainMenuController onActionCreateAnimal event handler. */
+    /**
+     *  This class and method were made to reduce code reuse in switching Scenes.  The original routine
+     *  taught in the webinar is viewable in the MainMenuController onActionCreateAnimal event handler.
+     */
     public static void switchToScene(ActionEvent event, String sceneFile) throws IOException {
         Parent root = FXMLLoader.load(SceneController.class.getResource(sceneFile));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

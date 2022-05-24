@@ -18,38 +18,101 @@ public class ModifyPartFormController implements Initializable {
 
     private Part partToModify;
 
+    /**
+     * Toggle group for In-House/Outsourced radio buttons.  The toggle group functionality is used only to keep one button selected at a time.
+     */
+
     @FXML private ToggleGroup AddPartToggleGroup;
+
+    /**
+     * The inhouse radio button fx:ml tag
+     * */
+
     @FXML private RadioButton inhouseRadioBtn;
+
+    /**
+     * The outsourced radio button fx:ml tag
+     * */
 
     @FXML private RadioButton outsourcedRadioBtn;
 
+    /**
+     * This is the fx:id of the text field for the company name or machineID of the current Part.
+     * */
+
     @FXML private TextField partAuxText;
+
+    /**
+     * This is the fx:id of the text field for the ID of the current Part.
+     * */
 
     @FXML private TextField partIDText;
 
+    /**
+     * This is the fx:id of the text field for the inventory quantity of the current Part.
+     * */
+
     @FXML private TextField partInvText;
+
+    /**
+     * This is the fx:id of the text field for the inventory maximum of the current Part.
+     * */
 
     @FXML private TextField partMaxText;
 
+    /**
+     * This is the fx:id of the text field for the inventory minimum of the current Part.
+     * */
+
     @FXML private TextField partMinText;
+
+    /**
+     * This is the fx:id of the text field for the name of the current Part.
+     * */
 
     @FXML private TextField partNameText;
 
+    /**
+     * This is the fx:id of the text field for the price of the current Part.
+     * */
+
     @FXML private TextField partPriceText;
 
+    /**
+     * This is the fx:id of the label field for the company name or MachineID of the current Part.
+     * */
+
     @FXML private Text partTypeAuxField;
+
+    /**
+     *
+     * */
+
     public Part selectedPart;
-    private int partID;
+
+    /**
+     * This method changes the label text to 'MachineID' when the inhouse button is selected.
+     * */
 
     @FXML
     void onActionSetTypeInhouse(ActionEvent event) {
+
         partTypeAuxField.setText("Machine ID");
     }
 
+    /**
+     * This method changes the label text to 'Company' when the outsourced button is selected.
+     * */
+
     @FXML
     void onActionSetTypeOutsourced(ActionEvent event) {
+
         partTypeAuxField.setText("Company");
     }
+
+    /**
+     * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * */
 
     @FXML
     void onActionDisplayMainForm(ActionEvent event) throws IOException {
@@ -60,10 +123,12 @@ public class ModifyPartFormController implements Initializable {
             switchToScene(event,"/view/MainForm.fxml");
     }
 
+    /**
+     * The sendPart method is used by the main form to send Part data to the modify part form.
+     * */
+
     public void sendPart(Part selectedPart) {
         this.selectedPart = selectedPart;
-
-//        partID = Inventory.getAllParts().indexOf(selectedPart);
 
         partIDText.setText((String.valueOf(selectedPart.getId())));
         partNameText.setText(selectedPart.getName());
@@ -85,6 +150,11 @@ public class ModifyPartFormController implements Initializable {
             partAuxText.setText(outsourcedPart.getCompanyName());
         }
     }
+
+    /**
+     * This method does the validation on the variables for viability and then feeds the data into the object
+     * constructor to update the allParts observableList data structure.
+     * */
 
     @FXML
     void onActionSaveChanges(ActionEvent event) throws IOException {
@@ -130,22 +200,13 @@ public class ModifyPartFormController implements Initializable {
                 invAlert.showAndWait();
                 return;
             }
-
-
-
         } catch(NumberFormatException e) {
-
         }
-
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
-
 
     }
 }
