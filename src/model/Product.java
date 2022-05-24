@@ -4,12 +4,32 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Product {
-    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    /** Declares the associated parts Observable List for the product object */
+
+    private static ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+
+    /** Declares the ID field for the product object */
+
     private int id;
+
+    /** Declares the Name field for the product object */
+
     private String name;
+
+    /** Declares the Price field for the product object */
+
     private double price;
+
+    /** Declares the Stock field for the product object */
+
     private int stock;
+
+    /** Declares the Min field for the product object */
+
     private int min;
+
+    /** Declares the Max field for the product object */
+
     private int max;
 
     public Product(int id, String name, double price, int stock, int min, int max) {
@@ -77,7 +97,7 @@ public class Product {
         associatedParts.addAll(parts);
     }
 
-    public void deleteAssociatedPart(Part part) {
+    public static void deleteAssociatedPart(Part part) {
         associatedParts.remove(part);
     }
 }

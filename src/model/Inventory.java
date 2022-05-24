@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 public class Inventory {
 
     /**
-     * Initializes the Observable list of products.
+     * Declares the Observable list of products.
      *
      */
 
@@ -57,6 +57,10 @@ public class Inventory {
         return allParts;
     }
 
+    /**
+     * This method removes the selectedProduct from the allProducts list
+     */
+
     public static boolean deleteProduct(Product selectedProduct) {
 
         if(allProducts.contains(selectedProduct)) {
@@ -65,8 +69,11 @@ public class Inventory {
         } else {
             return false;
         }
-
     }
+
+    /**
+     * This method removes the selectedPart from the allParts list
+     */
 
     public static boolean deletePart(Part selectedPart) {
         if (allParts.contains(selectedPart)) {
@@ -76,6 +83,10 @@ public class Inventory {
             return false;
         }
     }
+
+    /**
+     * This method replaces the product with a specific id with newProduct which is the modified version.
+     */
 
     public static void updateProduct(int id, Product newProduct){
         int index = -1;
@@ -87,9 +98,11 @@ public class Inventory {
                 Inventory.getAllProducts().set(index, newProduct);
             }
         }
-
-
     }
+
+    /**
+     * This method replaces the part with a specific id with newPart which is the modified version.
+     */
 
     public static void updatePart(int id, Part newPart ) {
         int index = -1;
@@ -101,9 +114,5 @@ public class Inventory {
                 Inventory.getAllParts().set(index, newPart);
             }
         }
-
-
     }
-
-
 }

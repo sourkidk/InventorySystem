@@ -170,6 +170,11 @@ public class ModifyProductFormController implements Initializable {
     @FXML
     void onActionRemovePart(ActionEvent event) {
 
+        Part selectedPart = allPartsTableView.getSelectionModel().getSelectedItem();
+        Product.deleteAssociatedPart(selectedPart);
+        associatedParts.remove(selectedPart);
+        associatedPartsTableView.setItems(associatedParts);
+
     }
 
     /**
