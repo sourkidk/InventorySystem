@@ -52,7 +52,7 @@
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="productIDText" editable="false" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="productIDText" editable="false" opacity="0.6" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" />
                         <TextField fx:id="productNameText" layoutX="86.0" layoutY="10.0" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>

@@ -194,10 +194,16 @@ public class AddProductFormController implements Initializable {
                 return;
             }
             else if ( stock > min && stock <= max ) {
-                Product product = new Product(id, name, price, stock, min, max);
-                product.addAssociatedParts(associatedParts);
-                Inventory.addProduct(product);
-                switchToScene(event, "/view/MainForm.fxml");
+                Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                saveAlert.setTitle("Save Changes");
+                saveAlert.setContentText("Confirm Save?");
+                Optional<ButtonType> result = saveAlert.showAndWait();
+                if ( result.isPresent() && result.get() == ButtonType.OK) {
+                    Product product = new Product(id, name, price, stock, min, max);
+                    product.addAssociatedParts(associatedParts);
+                    Inventory.addProduct(product);
+                    switchToScene(event, "/view/MainForm.fxml");
+                }
             }
             else {
                 Alert invAlert = new Alert(Alert.AlertType.ERROR);

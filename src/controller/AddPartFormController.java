@@ -141,14 +141,18 @@ public class AddPartFormController implements Initializable {
                 parsAlert.showAndWait();
                 return;
             }
+            else if ( stock > min && stock <= max && (partAuxText.getText() == "")) {
+                Alert parsAlert = new Alert(Alert.AlertType.ERROR);
+                parsAlert.setTitle("Invalid Entry.");
+                parsAlert.setContentText("You must select In-house or Outsourced and add a value for Machine ID or company.");
+                parsAlert.showAndWait();
+            }
             else if ( stock > min && stock <= max ) {
                 if (inhouseRadioBtn.isSelected()) {
                     int machineID = Integer.parseInt(partAuxText.getText());
-                    if (machineID != 0) {
-                        Inventory.addPart(new InHouse(id, name, price, stock, min, max, machineID));
-                        switchToScene(event, "/view/MainForm.fxml");
-                    } else
-                        System.out.println("Problem");
+                    Inventory.addPart(new InHouse(id, name, price, stock, min, max, machineID));
+                    switchToScene(event, "/view/MainForm.fxml");
+
                 } else if (outsourcedRadioBtn.isSelected()) {
                     String company = partAuxText.getText();
                     Inventory.addPart(new Outsourced(id, name, price, stock, min, max, company));
@@ -159,7 +163,6 @@ public class AddPartFormController implements Initializable {
                     sourceAlert.setContentText("You must select In-house or Outsourced for each item.");
                     sourceAlert.showAndWait();
                     return;
-
                 }
             } else {
                 Alert invAlert = new Alert(Alert.AlertType.ERROR);

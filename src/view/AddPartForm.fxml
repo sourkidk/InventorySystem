@@ -94,7 +94,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="partIDText" prefHeight="30.0" GridPane.columnIndex="1">
+                  <TextField fx:id="partIDText" editable="false" opacity="0.6" prefHeight="30.0" GridPane.columnIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>

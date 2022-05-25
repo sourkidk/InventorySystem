@@ -12,6 +12,25 @@ public class Inventory {
 
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
+    public static Product lookupProduct(int productID) {
+        for (Product product : Inventory.getAllProducts() ) {
+            if (product.getId() == productID )
+                return product;
+        }
+        return null;
+    }
+
+    public static ObservableList<Product> lookupProduct(String productName) {
+        ObservableList<Product> ProductName = FXCollections.observableArrayList();
+
+        for (Product product: allProducts) {
+            if (product.getName().contains(productName)) {
+                ProductName.add(product);
+            }
+        }
+        return ProductName;
+    }
+
     /**
      * This method adds a Product object to the allProducts Observablelist
      * @param product This is a Product object.

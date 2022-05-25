@@ -101,7 +101,7 @@
                                     <Insets right="125.0" />
                                  </HBox.margin>
                               </Text>
-                              <TextField alignment="CENTER_RIGHT" layoutX="361.0" layoutY="25.0" prefHeight="30.0" prefWidth="175.0" promptText="Search by Product ID or Name">
+                              <TextField fx:id="productSearchText" alignment="CENTER_RIGHT" layoutX="361.0" layoutY="25.0" onAction="#onActionProductSearch" prefHeight="30.0" prefWidth="175.0" promptText="Search by Product ID or Name">
                                  <HBox.margin>
                                     <Insets bottom="5.0" right="50.0" />
                                  </HBox.margin>

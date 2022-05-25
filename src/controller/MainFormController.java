@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,6 +104,9 @@ public class MainFormController implements Initializable {
      * */
 
     @FXML
+    private TextField productSearchText;
+
+    @FXML
     void onActionDisplayAddPartForm(ActionEvent event) throws IOException {
 
         switchToScene(event, "/view/AddPartForm.fxml");
@@ -125,6 +129,26 @@ public class MainFormController implements Initializable {
      * This method uses the sendPart method of the modifyPart class to send data from the selected part to the
      * modifyParts form and switches the scene.
      * */
+
+
+
+    @FXML
+    void onActionProductSearch(ActionEvent event) {
+        String searchText = productSearchText.getText();
+        ObservableList<Product> results = Inventory.lookupProduct(searchText);
+        try {
+            while (results.size() == 0 ) {
+                int productID = Integer.parseInt(searchText);
+                results.add(Inventory.lookupProduct(productID));
+            }
+            productTableView.setItems(results);
+        } catch (NumberFormatException e) {
+            Alert noParts = new Alert(Alert.AlertType.ERROR);
+            noParts.setTitle("Error Message");
+            noParts.setContentText("Product not found");
+            noParts.showAndWait();
+        }
+    }
 
     @FXML
     void onActionDisplayModifyPartForm(ActionEvent event) throws IOException {

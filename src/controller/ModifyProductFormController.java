@@ -170,9 +170,9 @@ public class ModifyProductFormController implements Initializable {
     @FXML
     void onActionRemovePart(ActionEvent event) {
 
-        Part selectedPart = allPartsTableView.getSelectionModel().getSelectedItem();
-        Product.deleteAssociatedPart(selectedPart);
-        associatedParts.remove(selectedPart);
+        Part selectedPartToDelete = associatedPartsTableView.getSelectionModel().getSelectedItem();
+        Product.deleteAssociatedPart(selectedPartToDelete);
+        associatedParts.remove(selectedPartToDelete);
         associatedPartsTableView.setItems(associatedParts);
 
     }
@@ -200,12 +200,17 @@ public class ModifyProductFormController implements Initializable {
                 return;
             }
             else if ( stock > min && stock <= max ) {
+                Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                saveAlert.setTitle("Save Changes");
+                saveAlert.setContentText("Saving changes will overwrite previous data. Confirm Save?");
+                Optional<ButtonType> result = saveAlert.showAndWait();
+                if ( result.isPresent() && result.get() == ButtonType.OK) {
+                    Product newProduct = new Product(id, name, price, stock, min, max);
+                    newProduct.addAssociatedParts(associatedParts);
+                    Inventory.updateProduct(id, newProduct);
+                    switchToScene(event, "/view/MainForm.fxml");
+                }
 
-                Product newProduct = new Product(id, name, price, stock, min, max);
-
-                newProduct.addAssociatedParts(associatedParts);
-                Inventory.updateProduct(id, newProduct);
-                switchToScene(event, "/view/MainForm.fxml");
             }
             else {
                 Alert invAlert = new Alert(Alert.AlertType.ERROR);

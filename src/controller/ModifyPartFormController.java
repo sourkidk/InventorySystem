@@ -174,6 +174,12 @@ public class ModifyPartFormController implements Initializable {
                 parsAlert.showAndWait();
                 return;
             }
+            else if ( stock > min && stock <= max && (partAuxText.getText() == "")) {
+                Alert parsAlert = new Alert(Alert.AlertType.ERROR);
+                parsAlert.setTitle("Invalid Entry.");
+                parsAlert.setContentText("You must select In-house or Outsourced and add a value for Machine ID or company.");
+                parsAlert.showAndWait();
+            }
             else if ( stock > min && stock <= max ) {
                 if (inhouseRadioBtn.isSelected()) {
                     int machineID = Integer.parseInt(partAuxText.getText());
