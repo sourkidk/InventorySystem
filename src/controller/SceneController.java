@@ -10,7 +10,16 @@ import java.io.IOException;
 
 public class SceneController {
 
+    /**
+     * This is the Stage variable used to change scenes.
+     * */
+
     private static Stage stage;
+
+    /**
+     * This is the Scene variable used to change scenes.
+     * */
+
     private static Scene scene;
 
 

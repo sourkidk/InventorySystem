@@ -100,11 +100,22 @@ public class MainFormController implements Initializable {
     private TableColumn<Product, Double> productPriceCol;
 
     /**
-     * This event handler switches to the AddParts scene.
+     * This is the textfield used by the onActionProductSearch method.
      * */
 
     @FXML
     private TextField productSearchText;
+
+    /**
+     * This is the textfield used by the onActionPartSearch method.
+     * */
+
+    @FXML
+    private TextField partSearchText;
+
+    /**
+     * This event handler switches to the AddParts scene.
+     * */
 
     @FXML
     void onActionDisplayAddPartForm(ActionEvent event) throws IOException {
@@ -123,32 +134,66 @@ public class MainFormController implements Initializable {
     }
 
     /**
+     * This method uses both forms of the lookupProduct method to check the searchText against a Products' name and ID. It checks first
+     * for Products using the method that can return multiple objects then if that is still empty, it will check using the method that
+     * checks against ID and returns a single Product.
+     */
+
+    @FXML
+    void onActionProductSearch(ActionEvent event) {
+        String searchText = productSearchText.getText();
+        ObservableList<Product> productTempList = Inventory.lookupProduct(searchText);
+        if (productTempList.size() != 0 ) {
+            productTableView.setItems(productTempList);
+        }
+        else {
+            try {
+                int partID = Integer.parseInt(searchText);
+                productTempList.add(Inventory.lookupProduct(partID));
+                productTableView.setItems(productTempList);
+            } catch (NumberFormatException e) {
+                Alert notFound = new Alert(Alert.AlertType.ERROR);
+                notFound.setTitle("Product Not Found");
+                notFound.setContentText("No Product with that search term");
+                notFound.showAndWait();
+            }
+        }
+    }
+
+    /**
+     * This method uses both forms of the lookupPart method to check the searchText against a Parts' name and ID. It checks first
+     * for parts using the method that can return multiple objects then if that is still empty, it will check using the method that
+     * checks against ID and returns a single part.
+     * */
+
+    @FXML
+    void onActionPartSearch(ActionEvent event) {
+        String searchText = partSearchText.getText();
+        ObservableList<Part> tempList = Inventory.lookupPart(searchText);
+        if (tempList.size() != 0 ) {
+            partTableView.setItems(tempList);
+        }
+        else {
+            try {
+                int partID = Integer.parseInt(searchText);
+                tempList.add(Inventory.lookupPart(partID));
+                partTableView.setItems(tempList);
+            } catch (NumberFormatException e) {
+                Alert notFound = new Alert(Alert.AlertType.ERROR);
+                notFound.setTitle("Part Not Found");
+                notFound.setContentText("No Part with that search term");
+                notFound.showAndWait();
+            }
+        }
+    }
+
+    /**
      * RUNTIME ERROR: The try-catch clause prevents the program from crashing due to NullPointerException.  By default
      * no part is selected in the main form, so it's common to try to switch to that scene without first selecting an object.
      *
      * This method uses the sendPart method of the modifyPart class to send data from the selected part to the
      * modifyParts form and switches the scene.
      * */
-
-
-
-    @FXML
-    void onActionProductSearch(ActionEvent event) {
-        String searchText = productSearchText.getText();
-        ObservableList<Product> results = Inventory.lookupProduct(searchText);
-        try {
-            while (results.size() == 0 ) {
-                int productID = Integer.parseInt(searchText);
-                results.add(Inventory.lookupProduct(productID));
-            }
-            productTableView.setItems(results);
-        } catch (NumberFormatException e) {
-            Alert noParts = new Alert(Alert.AlertType.ERROR);
-            noParts.setTitle("Error Message");
-            noParts.setContentText("Product not found");
-            noParts.showAndWait();
-        }
-    }
 
     @FXML
     void onActionDisplayModifyPartForm(ActionEvent event) throws IOException {

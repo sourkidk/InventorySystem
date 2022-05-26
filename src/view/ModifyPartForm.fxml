@@ -94,22 +94,12 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
+                  <TextField fx:id="partIDText" editable="false" layoutX="93.0" layoutY="50.0" opacity="0.6" prefHeight="30.0" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
                   <TextField fx:id="partNameText" layoutX="93.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="partMinText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="partAuxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="partMaxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -124,7 +114,17 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="partIDText" editable="false" layoutX="93.0" layoutY="50.0" opacity="0.6" prefHeight="30.0" GridPane.columnIndex="1">
+                  <TextField fx:id="partMaxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="partMinText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="partAuxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>

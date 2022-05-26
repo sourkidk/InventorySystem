@@ -9,9 +9,11 @@ import model.InHouse;
 import model.Inventory;
 import model.Product;
 
-import java.sql.SQLOutput;
-
 public class Main extends Application {
+
+    /**
+     * The start method determines which scene display first, and gets the Name of the window.
+     * */
 
     @Override
     public void start(Stage primaryStage) throws Exception{

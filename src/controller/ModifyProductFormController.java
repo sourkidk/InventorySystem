@@ -132,6 +132,9 @@ public class ModifyProductFormController implements Initializable {
 
     @FXML private TextField productNameText;
 
+    @FXML
+    private TextField partSearchText;
+
     /**
      * This is the text field for the price of the current Part.
      * */
@@ -164,7 +167,7 @@ public class ModifyProductFormController implements Initializable {
     }
 
     /**
-     *
+     * This method removes the selectPart from the associatedParts list.
      * */
 
     @FXML
@@ -240,6 +243,24 @@ public class ModifyProductFormController implements Initializable {
 
         associatedParts.addAll(selectedProduct.getAllAssociatedParts());
 
+    }
+
+    @FXML
+    void onActionPartSearch(ActionEvent event) {
+        String searchText = partSearchText.getText();
+        ObservableList<Part> results = Inventory.lookupPart(searchText);
+        try {
+            while (results.size() == 0 ) {
+                int partID = Integer.parseInt(searchText);
+                results.add(Inventory.lookupPart(partID));
+            }
+            allPartsTableView.setItems(results);
+        } catch (NumberFormatException e) {
+            Alert noParts = new Alert(Alert.AlertType.ERROR);
+            noParts.setTitle("Error Message");
+            noParts.setContentText("Part not found");
+            noParts.showAndWait();
+        }
     }
 
     /**

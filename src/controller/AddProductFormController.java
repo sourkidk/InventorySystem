@@ -147,6 +147,14 @@ public class AddProductFormController implements Initializable {
     private TableColumn<Part, Double> associatedPartPriceColumn;
 
     /**
+     * This is the textfield used by the onActionProductSearch method.
+     * */
+
+    @FXML
+    private TextField partSearchText;
+
+
+    /**
      * This method adds the selectedPart to the associatedparts list.
      * */
 
@@ -159,7 +167,7 @@ public class AddProductFormController implements Initializable {
     }
 
     /**
-     *
+     * This method removes the selectPart from the associatedParts list.
      * */
 
 
@@ -231,7 +239,8 @@ public class AddProductFormController implements Initializable {
     }
 
     /**
-     * This method calls the size method of the allProducts list object and adds the quantity to a base number to make unique sequential ID numbers
+     * This method calls the size method of the allProducts list object and adds the quantity to a base number to
+     * make unique sequential ID numbers.
      * */
 
     public static int generateNewID() {
@@ -240,6 +249,32 @@ public class AddProductFormController implements Initializable {
         return startingID + count;
     }
 
+    /**
+     * This method uses both forms of the lookupPart method to check the searchText against a Parts' name and ID. It checks first
+     * for parts using the method that can return multiple objects then if that is still empty, it will check using the method that
+     * checks against ID and returns a single part.
+     * */
+
+    @FXML
+    void onActionPartSearch(ActionEvent event) {
+        String searchText = partSearchText.getText();
+        ObservableList<Part> tempList = Inventory.lookupPart(searchText);
+        if (tempList.size() != 0 ) {
+            allPartTableView.setItems(tempList);
+        }
+        else {
+            try {
+                int partID = Integer.parseInt(searchText);
+                tempList.add(Inventory.lookupPart(partID));
+                allPartTableView.setItems(tempList);
+            } catch (NumberFormatException e) {
+                Alert notFound = new Alert(Alert.AlertType.ERROR);
+                notFound.setTitle("Part Not Found");
+                notFound.setContentText("No Part with that search term");
+                notFound.showAndWait();
+            }
+        }
+    }
     /**
      * When the addProducts form is loaded, the allParts and associatedParts lists are loaded into the table views.
      * */

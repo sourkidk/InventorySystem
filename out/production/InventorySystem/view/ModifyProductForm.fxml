@@ -70,9 +70,9 @@
                      </rowConstraints>
                      <children>
                         <TextField fx:id="productInvText" prefHeight="30.0" prefWidth="102.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="productMinText" layoutX="141.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <TextField fx:id="productMaxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="productPriceText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="productMaxText" layoutX="10.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="productMinText" layoutX="141.0" layoutY="13.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Inv">
                            <font>
                               <Font size="14.0" />
@@ -107,7 +107,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="175.0" promptText="Search by Part ID or Name" />
+                        <TextField fx:id="partSearchText" layoutX="10.0" layoutY="10.0" onAction="#onActionPartSearch" prefHeight="30.0" prefWidth="175.0" promptText="Search by Part ID or Name" />
                      </children>
                   </HBox>
                   <TableView fx:id="allPartsTableView" prefHeight="200.0" prefWidth="200.0">

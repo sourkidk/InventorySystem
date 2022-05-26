@@ -12,6 +12,10 @@ public class Inventory {
 
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
+    /**
+     * This lookupProduct method checks the given integer against the productIDs in the list and returns a single match or null.
+     * */
+
     public static Product lookupProduct(int productID) {
         for (Product product : Inventory.getAllProducts() ) {
             if (product.getId() == productID )
@@ -19,6 +23,40 @@ public class Inventory {
         }
         return null;
     }
+
+    /**
+     * This lookupPart method checks the given integer against the partIDs in the list and returns a single match or null.
+     * */
+
+    public static Part lookupPart(int partID) {
+        for (Part part : Inventory.getAllParts()) {
+            while (part.getId() == partID) {
+                return part;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This lookupPart method checks the given string against the names of each object in the list and returns a new
+     * observableList of Parts that match.
+     * */
+
+    public static ObservableList<Part> lookupPart(String partName) {
+        ObservableList<Part> PartName = FXCollections.observableArrayList();
+
+        for (Part part: allParts) {
+            if (part.getName().contains(partName)) {
+                PartName.add(part);
+            }
+        }
+        return PartName;
+    }
+
+    /**
+     * This lookupProduct method checks the given string against the names of each object in the list and returns a new
+     * observableList of Products that match.
+     * */
 
     public static ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> ProductName = FXCollections.observableArrayList();
@@ -59,7 +97,7 @@ public class Inventory {
 
     /**
      * This method adds a Part object to the allParts Observablelist
-     * @param part This is a Part object.
+     *
      */
 
     public static void addPart(Part part) {

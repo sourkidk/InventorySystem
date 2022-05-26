@@ -16,7 +16,7 @@ import static controller.SceneController.switchToScene;
 
 public class ModifyPartFormController implements Initializable {
 
-    private Part partToModify;
+//    private Part partToModify;
 
     /**
      * Toggle group for In-House/Outsourced radio buttons.  The toggle group functionality is used only to keep one button selected at a time.
@@ -85,7 +85,7 @@ public class ModifyPartFormController implements Initializable {
     @FXML private Text partTypeAuxField;
 
     /**
-     *
+     * This variable holds the Part object brought in by the sendPart method.
      * */
 
     public Part selectedPart;
@@ -210,6 +210,9 @@ public class ModifyPartFormController implements Initializable {
         }
     }
 
+/**
+ * This is the initialize method.  This class does not use the method, but I left it in as a placeholder.
+ * */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
