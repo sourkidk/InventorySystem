@@ -16,6 +16,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
+/**
+ * The addProductFormController class is the complement to the addProductForm view.  Contains the methods required to manipulate
+ * data into and out of the addProduct scene.
+ * @author Keith Fletcher
+ */
+
 public class AddProductFormController implements Initializable {
 
     /**
@@ -156,6 +162,7 @@ public class AddProductFormController implements Initializable {
 
     /**
      * This method adds the selectedPart to the associatedparts list.
+     * @param event
      * */
 
     @FXML
@@ -168,6 +175,7 @@ public class AddProductFormController implements Initializable {
 
     /**
      * This method removes the selectPart from the associatedParts list.
+     * @param event
      * */
 
 
@@ -182,6 +190,8 @@ public class AddProductFormController implements Initializable {
     /**
      * This method does the validation on the variables for viability and then feeds the data into the object
      * constructor to add to the allProducts observableList data structure.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -227,6 +237,8 @@ public class AddProductFormController implements Initializable {
 
     /**
      * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -253,6 +265,7 @@ public class AddProductFormController implements Initializable {
      * This method uses both forms of the lookupPart method to check the searchText against a Parts' name and ID. It checks first
      * for parts using the method that can return multiple objects then if that is still empty, it will check using the method that
      * checks against ID and returns a single part.
+     * @param event
      * */
 
     @FXML
@@ -277,6 +290,8 @@ public class AddProductFormController implements Initializable {
     }
     /**
      * When the addProducts form is loaded, the allParts and associatedParts lists are loaded into the table views.
+     * @param url
+     * @param resourceBundle
      * */
 
     @Override

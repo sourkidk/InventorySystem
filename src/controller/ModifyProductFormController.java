@@ -16,6 +16,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
+/**
+ * The ModifyProductFormController class is the complement to the ModifyPartForm view.  Contains the methods required to manipulate
+ * data into and out of the ModifyPart scene.
+ * @author Keith Fletcher
+ */
+
 public class ModifyProductFormController implements Initializable {
 
     /**
@@ -143,6 +149,7 @@ public class ModifyProductFormController implements Initializable {
 
     /**
      * This method adds the selectedPart to the associatedParts list.
+     * @param event
      * */
 
     @FXML
@@ -154,6 +161,8 @@ public class ModifyProductFormController implements Initializable {
 
     /**
      * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * @param event
+     * @throws IOException
      * */
 
 
@@ -168,6 +177,7 @@ public class ModifyProductFormController implements Initializable {
 
     /**
      * This method removes the selectPart from the associatedParts list.
+     * @param event
      * */
 
     @FXML
@@ -183,6 +193,8 @@ public class ModifyProductFormController implements Initializable {
     /**
      * This method does the validation on the variables for viability and then feeds the data into the object
      * constructor to update the core observableList data structure.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -229,6 +241,7 @@ public class ModifyProductFormController implements Initializable {
 
     /**
      * The sendProduct method is used by the main form to send Product data to the modify product form.
+     * @param selectedProduct
      * */
 
     public void sendProduct(Product selectedProduct) {
@@ -244,27 +257,38 @@ public class ModifyProductFormController implements Initializable {
         associatedParts.addAll(selectedProduct.getAllAssociatedParts());
 
     }
+    /**
+     * This method uses both forms of the lookupPart method to check the searchText against a Parts' name and ID. It checks first
+     * for parts using the method that can return multiple objects then if that is still empty, it will check using the method that
+     * checks against ID and returns a single part.
+     * @param event
+     * */
 
     @FXML
     void onActionPartSearch(ActionEvent event) {
         String searchText = partSearchText.getText();
-        ObservableList<Part> results = Inventory.lookupPart(searchText);
-        try {
-            while (results.size() == 0 ) {
+        ObservableList<Part> tempList = Inventory.lookupPart(searchText);
+        if (tempList.size() != 0 ) {
+            allPartsTableView.setItems(tempList);
+        }
+        else {
+            try {
                 int partID = Integer.parseInt(searchText);
-                results.add(Inventory.lookupPart(partID));
+                tempList.add(Inventory.lookupPart(partID));
+                allPartsTableView.setItems(tempList);
+            } catch (NumberFormatException e) {
+                Alert notFound = new Alert(Alert.AlertType.ERROR);
+                notFound.setTitle("Part Not Found");
+                notFound.setContentText("No Part with that search term");
+                notFound.showAndWait();
             }
-            allPartsTableView.setItems(results);
-        } catch (NumberFormatException e) {
-            Alert noParts = new Alert(Alert.AlertType.ERROR);
-            noParts.setTitle("Error Message");
-            noParts.setContentText("Part not found");
-            noParts.showAndWait();
         }
     }
 
     /**
      * When the modify products form is loaded, the allParts and associatedParts lists are loaded into the table views.
+     * @param url
+     * @param resourceBundle
      * */
 
     @Override

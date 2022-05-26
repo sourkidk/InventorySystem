@@ -14,9 +14,14 @@ import java.util.ResourceBundle;
 
 import static controller.SceneController.switchToScene;
 
+/**
+ * The ModifyPartFormController class is the complement to the addPartForm view.  Contains the methods required to manipulate
+ * data into and out of the ModifyPart scene.
+ * @author Keith Fletcher
+ */
+
 public class ModifyPartFormController implements Initializable {
 
-//    private Part partToModify;
 
     /**
      * Toggle group for In-House/Outsourced radio buttons.  The toggle group functionality is used only to keep one button selected at a time.
@@ -92,6 +97,7 @@ public class ModifyPartFormController implements Initializable {
 
     /**
      * This method changes the label text to 'MachineID' when the inhouse button is selected.
+     * @param event
      * */
 
     @FXML
@@ -102,6 +108,7 @@ public class ModifyPartFormController implements Initializable {
 
     /**
      * This method changes the label text to 'Company' when the outsourced button is selected.
+     * @param event
      * */
 
     @FXML
@@ -112,6 +119,8 @@ public class ModifyPartFormController implements Initializable {
 
     /**
      * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -125,6 +134,7 @@ public class ModifyPartFormController implements Initializable {
 
     /**
      * The sendPart method is used by the main form to send Part data to the modify part form.
+     * @param selectedPart
      * */
 
     public void sendPart(Part selectedPart) {
@@ -154,6 +164,8 @@ public class ModifyPartFormController implements Initializable {
     /**
      * This method does the validation on the variables for viability and then feeds the data into the object
      * constructor to update the allParts observableList data structure.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -212,6 +224,8 @@ public class ModifyPartFormController implements Initializable {
 
 /**
  * This is the initialize method.  This class does not use the method, but I left it in as a placeholder.
+ * @param url
+ * @param resourceBundle
  * */
 
     @Override

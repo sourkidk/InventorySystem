@@ -9,10 +9,18 @@ import model.InHouse;
 import model.Inventory;
 import model.Product;
 
+/**
+ * The Main class initializes the program and calls the requisite methods to show the first scene.  Our
+ * test objects are also instantiated here.
+ * @author Keith Fletcher
+ * */
+
 public class Main extends Application {
 
     /**
      * The start method determines which scene display first, and gets the Name of the window.
+     * @param primaryStage The Stage object used to build the scene upon.
+     * @throws Exception
      * */
 
     @Override
@@ -35,6 +43,8 @@ public class Main extends Application {
      * You could have a flag or checkbox on each item detail page indicating needing to be reordered or produced in the
      * case of In-house products.  You could also add an additional scene accessible via a button on the Main form that provides a
      * list of all items that need to be reordered or produced.
+     *
+     * @param args
      * */
 
 

@@ -19,6 +19,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import static controller.SceneController.switchToScene;
 
+/**
+ * The MainFormController class is the complement to the MainForm view.  Contains tableviews that display the allParts
+ * and allProducts observableLists and methods required to send data to the other forms.
+ * @author Keith Fletcher
+ */
+
 public class MainFormController implements Initializable {
 
     /**
@@ -115,6 +121,8 @@ public class MainFormController implements Initializable {
 
     /**
      * This event handler switches to the AddParts scene.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -125,6 +133,8 @@ public class MainFormController implements Initializable {
 
     /**
      * This event handler switches to the AddProducts scene.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -137,6 +147,7 @@ public class MainFormController implements Initializable {
      * This method uses both forms of the lookupProduct method to check the searchText against a Products' name and ID. It checks first
      * for Products using the method that can return multiple objects then if that is still empty, it will check using the method that
      * checks against ID and returns a single Product.
+     * @param event
      */
 
     @FXML
@@ -164,6 +175,7 @@ public class MainFormController implements Initializable {
      * This method uses both forms of the lookupPart method to check the searchText against a Parts' name and ID. It checks first
      * for parts using the method that can return multiple objects then if that is still empty, it will check using the method that
      * checks against ID and returns a single part.
+     * @param event
      * */
 
     @FXML
@@ -193,6 +205,8 @@ public class MainFormController implements Initializable {
      *
      * This method uses the sendPart method of the modifyPart class to send data from the selected part to the
      * modifyParts form and switches the scene.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -224,6 +238,8 @@ public class MainFormController implements Initializable {
     /**
      * This method uses the sendProduct method of the modifyProduct class to send data from the selected product to the
      * modifyProducts form and switches the scene.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -254,6 +270,7 @@ public class MainFormController implements Initializable {
 
     /**
      * This method removes the selected part permanently from the core observableList data structure
+     * @param event
      * */
 
     @FXML
@@ -271,6 +288,7 @@ public class MainFormController implements Initializable {
 
     /**
      * This method removes the selected product permanently from the core observableList data structure
+     * @param event
      * */
 
     @FXML
@@ -297,6 +315,7 @@ public class MainFormController implements Initializable {
 
     /**
      * This method does a system call to exit the program
+     * @param event
      * */
 
     @FXML
@@ -306,6 +325,8 @@ public class MainFormController implements Initializable {
 
     /**
      * When the Main form is loaded, the allParts and allProducts lists are loaded into the table views.
+     * @param url
+     * @param resourceBundle
      * */
 
     @Override

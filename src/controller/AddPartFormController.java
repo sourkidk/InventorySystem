@@ -15,6 +15,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static controller.SceneController.switchToScene;
+/**
+ * The addPartFormController class is the complement to the addPartForm view.  Contains the methods required to manipulate
+ * data into and out of the addPart scene.
+ * @author Keith Fletcher
+ */
 
 public class AddPartFormController implements Initializable {
 
@@ -103,6 +108,7 @@ public class AddPartFormController implements Initializable {
 
     /**
      * This method changes the label text to 'MachineID' when the inhouse button is selected.
+     * @param event
      * */
 
     @FXML
@@ -112,6 +118,7 @@ public class AddPartFormController implements Initializable {
 
     /**
      * This method changes the label text to 'Company' when the outsourced button is selected.
+     * @param event
      * */
 
     @FXML
@@ -122,6 +129,8 @@ public class AddPartFormController implements Initializable {
     /**
      * This method does the validation on the variables for viability and then feeds the data into the object
      * constructor to add to the allParts observableList data structure.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -178,6 +187,8 @@ public class AddPartFormController implements Initializable {
 
     /**
      * This method raises an alert to notify the user that any changes will be lost before returning to the main form.
+     * @param event
+     * @throws IOException
      * */
 
     @FXML
@@ -190,7 +201,8 @@ public class AddPartFormController implements Initializable {
     }
 
     /**
-     * This method calls the size method of the allParts list object and adds the quantity to a base number to make unique sequential ID numbers
+     * This method calls the size method of the allParts list object and adds the quantity to a base number to make unique sequential ID numbers.
+
      * */
 
     public static int generateNewID() {
@@ -201,6 +213,8 @@ public class AddPartFormController implements Initializable {
 
     /**
      * The initialize method feeds the nextID variable into the partIDText field so that the ID is set before the rest of the fields are added by the user.
+     * @param url
+     * @param resourceBundle
      * */
 
     @Override

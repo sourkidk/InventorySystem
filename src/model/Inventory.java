@@ -3,6 +3,11 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * The inventory class hold the methods and objects that manage the Part and Product Objects.
+ * @author Keith Fletcher
+ */
+
 public class Inventory {
 
     /**
@@ -14,6 +19,8 @@ public class Inventory {
 
     /**
      * This lookupProduct method checks the given integer against the productIDs in the list and returns a single match or null.
+     * @param productID
+     * @return
      * */
 
     public static Product lookupProduct(int productID) {
@@ -26,6 +33,8 @@ public class Inventory {
 
     /**
      * This lookupPart method checks the given integer against the partIDs in the list and returns a single match or null.
+     * @param partID
+     * @return Part
      * */
 
     public static Part lookupPart(int partID) {
@@ -40,6 +49,8 @@ public class Inventory {
     /**
      * This lookupPart method checks the given string against the names of each object in the list and returns a new
      * observableList of Parts that match.
+     * @param partName
+     * @param ObservableList<Part>
      * */
 
     public static ObservableList<Part> lookupPart(String partName) {
@@ -56,6 +67,8 @@ public class Inventory {
     /**
      * This lookupProduct method checks the given string against the names of each object in the list and returns a new
      * observableList of Products that match.
+     * @param productName
+     * @param ObservableList<Product>
      * */
 
     public static ObservableList<Product> lookupProduct(String productName) {
@@ -80,6 +93,7 @@ public class Inventory {
     }
     /**
      * This method returns the ObservableList object allProducts.
+     * @return allProducts
      */
 
 
@@ -97,7 +111,7 @@ public class Inventory {
 
     /**
      * This method adds a Part object to the allParts Observablelist
-     *
+     * @param part
      */
 
     public static void addPart(Part part) {
@@ -106,6 +120,7 @@ public class Inventory {
     }
     /**
      * This method returns the ObservableList object allParts.
+     * @return allParts
      */
 
 
@@ -116,6 +131,8 @@ public class Inventory {
 
     /**
      * This method removes the selectedProduct from the allProducts list
+     * @param selectedProduct
+     * @return boolean
      */
 
     public static boolean deleteProduct(Product selectedProduct) {
@@ -130,6 +147,8 @@ public class Inventory {
 
     /**
      * This method removes the selectedPart from the allParts list
+     * @param selectedPart
+     * @return boolean
      */
 
     public static boolean deletePart(Part selectedPart) {
@@ -143,6 +162,8 @@ public class Inventory {
 
     /**
      * This method replaces the product with a specific id with newProduct which is the modified version.
+     * @ param id
+     * @ param newProduct
      */
 
     public static void updateProduct(int id, Product newProduct){
@@ -159,6 +180,8 @@ public class Inventory {
 
     /**
      * This method replaces the part with a specific id with newPart which is the modified version.
+     * @param id
+     * @param newPart
      */
 
     public static void updatePart(int id, Part newPart ) {
